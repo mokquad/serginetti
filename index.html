@@ -2,16 +2,19 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Serginetti</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
-            <h1>SERGINETTI</h1>
+	<div class="mydiv">
+	<h1>SERGINETTI</h1>
+	</div>		
     </header>
 
-    <section id="home" class="hero">
+    <section id="home">
         <div class="container">
 		
 		<center>
@@ -32,25 +35,71 @@
           <nav>
                 <ul>
                     <li><a href="#hits">Хиты</a></li>
-                    <li><a href="#newitems">Новинки</a></li>
-                    <li><a href="#sale">Распродажа</a></li>
                 </ul>
             </nav>   
 		</center>
 		
-            <div class="product-grid">
-                <div class="product-item">
+		<center>
+		
+        <div class="product-item">
                     <img src="dress1.png" alt="Платье">
-                    <h3>test</h3>
-                    <p>тут будет цена</p>
-                </div>
+                    <h3>Топ с декоративным элементом в белом цвете</h3>
+                    <p>5980 руб.</p>
+                    <button class="add-to-cart" data-product="Платье" data-price="3000">Добавить в корзину</button>
+                </div>  
+				
+		<div class="product-item">
+                    <img src="dress1.png" alt="Платье">
+                    <h3>Оверсайз жакет в нежном розовом цвете</h3>
+                    <p>801 руб.</p>
+                    <button class="add-to-cart" data-product="Платье" data-price="3000">Добавить в корзину</button>
+                </div>  		
+		   
         </div>
     </section>
+	</center>
 
     <footer>
         <div class="container">
             <p>&copy; 2025 Serginetti Chita. </p>
         </div>
     </footer>
+	
+	 <script>
+        let cart = [];
+        let total = 0;
+
+        document.querySelectorAll('.add-to-cart').forEach(button => {
+            button.addEventListener('click', () => {
+                const product = button.getAttribute('data-product');
+                const price = parseFloat(button.getAttribute('data-price'));
+                
+                // Добавляем продукт в корзину
+                cart.push({product, price});
+                total += price;
+
+                // Обновляем отображение корзины
+                updateCart();
+            });
+        });
+
+        function updateCart() {
+            const cartItems = document.getElementById('cart-items');
+            cartItems.innerHTML = '';
+
+            cart.forEach(item => {
+                const div = document.createElement('div');
+                div.textContent = `${item.product} - ${item.price} руб.`;
+                cartItems.appendChild(div);
+            });
+
+            // Обновляем общую цену
+            document.getElementById('total-price').textContent = `Итого: ${total} руб.`;
+
+            // Показываем кнопку оформления заказа, если корзина не пустая
+            document.getElementById('checkout').style.display = cart.length > 0 ? 'block' : 'none';
+        }
+    </script>
+	
 </body>
 </html>
