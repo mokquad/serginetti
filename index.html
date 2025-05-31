@@ -6,11 +6,12 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Serginetti</title>
     <link rel="stylesheet" href="styles.css">
+	<link rel="stylesheet" href="styles1.css">
 </head>
 <body>
     <header>
 	<div class="mydiv">
-	<h1>SERGINETTI</h1>
+	<h1>SERGINETTI</h1> 
 	</div>		
     </header>
 
@@ -25,6 +26,18 @@
 		    <p>Мы следим за последними модными тенденциями, чтобы предложить вам актуальные коллекции, которые подойдут как для работы, так и для отдыха. У нас есть модели на любой вкус и размер — от классики до смелых новинок. Также мы регулярно обновляем ассортимент, чтобы вы всегда могли найти что-то новое и интересное.</p>
 			<p>Покупая в интернет-магазине женской одежды SERGINNETTI, вы можете рассчитывать на выгодные цены, простую процедуру оформления заказа и быструю доставку с примеркой. Мы заботимся о своих клиентах и стремимся сделать шоппинг максимально комфортным.</p>
 			<p>Присоединяйтесь к модной семье SERGINNETTI уже сегодня! Откройте для себя мир стильной женской одежды и найдите свои идеальные вещи в нашем интернет-магазине. Ваш безупречный образ ждет вас!</p>
+			
+			<p>                                                                                                                                                                                             </p>
+			
+			<h2>Инструменты для покупок</h2>
+		
+		<div class="column">
+		<button class="add-to-cart" onclick="window.location.href='cart.html'">❤</button>
+		
+		
+        </div>
+    </div>
+			
 		</center>
 		</main>
 		
@@ -48,25 +61,23 @@
                     <img src="dress1.png" alt="Платье">
                     <h3>Топ с декоративным элементом в белом цвете</h3>
                     <p>5980 руб.</p>
-                    <button class="add-to-cart" data-product="Платье" data-price="3000">Добавить в корзину</button>
+                    <button class="add-to-cart" data-product="image" data-price="3000">Выбрать</button>
                 </div>  
 				
 		<div class="product-item">
                     <img src="dress1.png" alt="Платье">
                     <h3>Оверсайз жакет в нежном розовом цвете</h3>
                     <p>801 руб.</p>
-                    <button class="add-to-cart" data-product="Платье" data-price="3000">Добавить в корзину</button>
-                </div>  		
-		   
+                    <button class="add-to-cart" data-product="image" data-price="3000">Выбрать</button>
+                </div>  
+				
+				
+				
         </div>
     </section>
 	</center>
+</div>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2025 Serginetti Chita. </p>
-        </div>
-    </footer>
 	
 	 <script>
         let cart = [];
@@ -102,6 +113,67 @@
             // Показываем кнопку оформления заказа, если корзина не пустая
             document.getElementById('checkout').style.display = cart.length > 0 ? 'block' : 'none';
         }
+		
+		let cart = JSON.parse(localStorage.getItem('cart')) || [];
+let total = 0;
+
+document.querySelectorAll('.add-to-cart').forEach(button => {
+    button.addEventListener('click', () => {
+        const productItem = button.parentElement;
+        const id = productItem.getAttribute('data-id');
+        const name = productItem.getAttribute('data-name');
+        const price = parseFloat(productItem.getAttribute('data-price'));
+
+        addToCart(id, name, price);
+    });
+});
+
+// Функция добавления товара в корзину
+function addToCart(id, name, price) {
+    const existingProduct = cart.find(item => item.id === id);
+
+    if (existingProduct) {
+        existingProduct.quantity++;
+    } else {
+        cart.push({ id, name, price, quantity: 1 });
+    }
+
+    updateCart();
+    saveCartToLocalStorage();
+}
+
+// Обновление отображения корзины
+function updateCart() {
+    const cartItemsContainer = document.getElementById('cart-items');
+    cartItemsContainer.innerHTML = '';
+    total = 0;
+
+    cart.forEach(item => {
+        const itemTotal = item.price * item.quantity;
+        total += itemTotal;
+        cartItemsContainer.innerHTML += `<div>${item.name} - ${item.quantity} шт. (Цена: ${itemTotal} руб.)</div>`;
+    });
+
+    document.getElementById('total-price').textContent = `Итого: ${total} руб.`;
+    document.getElementById('checkout').style.display = cart.length > 0 ? 'block' : 'none';
+ }
+
+// Сохранение корзины в локальное хранилище
+function saveCartToLocalStorage() {
+    localStorage.setItem('cart', JSON.stringify(cart));
+}
+
+// Загрузка корзины из локального хранилища
+document.getElementById('load-cart').addEventListener('click', () => {
+    cart = JSON.parse(localStorage.getItem('cart')) || [];
+    updateCart();
+});
+
+// Обработчик события для кнопки сохранения корзины
+document.getElementById('save-cart').addEventListener('click', () => {
+    saveCartToLocalStorage();
+    alert('Корзина сохранена!');
+});
     </script>
 	
 </body>
