@@ -180,6 +180,15 @@ button {
     background-color: #522d63;
 }
 
+.buttonfromhell {
+    background-color: #522d63;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 30px;
+	font-size: 30px;
+}
+
 .cart {
     margin-top: 20px;
     border: 1px solid #ddd;
@@ -255,6 +264,21 @@ button {
     margin-bottom: 10px;
 }
 
+.add-to-card {
+    background-color: #522d63;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 30px;
+	font-size: 40px;
+}
+
+.icon{
+			position: relative;
+			height: 0.8em;
+			margin-right:10px;
+			top: 0px; // Change that for vertical alignement. If OK as is, delete.
+		}
 
 footer {
 	background: #fff;
