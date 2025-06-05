@@ -186,6 +186,15 @@ button {
     border: none;
     cursor: pointer;
     border-radius: 30px;
+	font-size: 40px;
+}
+
+.buttonfrombutt {
+    background-color: #522d63;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 30px;
 	font-size: 30px;
 }
 
@@ -245,6 +254,15 @@ button {
     border-radius: 30px;
 }
 
+.active {
+    background-color: #F5F3F0;
+	width: 25%;
+    color: #F5F3F0;
+    border: none;
+    cursor: pointer;
+    border-radius: 30px;
+}
+
 .column-container {
     display: flex;
     justify-content: space-around;
@@ -279,6 +297,7 @@ button {
 			margin-right:10px;
 			top: 0px; // Change that for vertical alignement. If OK as is, delete.
 		}
+		
 
 footer {
 	background: #fff;
